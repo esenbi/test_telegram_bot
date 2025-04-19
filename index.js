@@ -105,7 +105,7 @@ app.post('/mark-done', async (req, res) => {
     }
 });
 
-app.post('/webhook', (req, res) => {
+app.post('/webhook', async (req, res) => {
     const update = req.body;
     console.log('🔔 Received Telegram update:', JSON.stringify(update));
 
@@ -118,6 +118,25 @@ app.post('/webhook', (req, res) => {
     //         text: reply,
     //     });
     // }
+
+    if (update.entities.type === 'bot_command' && update.text === '/start') {
+        await axios.post(`${TELEGRAM_API}/sendMessage`, {
+            chat_id: CHAT_ID,
+            text: '📱 Пожалуйста, отправьте ваш номер телефона:',
+            reply_markup: {
+                keyboard: [
+                    [
+                        {
+                            text: '📤 Отправить номер',
+                            request_contact: true, // 🔑 this is what requests the phone number
+                        },
+                    ],
+                ],
+                resize_keyboard: true,
+                one_time_keyboard: true,
+            },
+        });
+    }
 
     res.sendStatus(200);
 });
