@@ -150,7 +150,13 @@ app.get('/items', async (req, res) => {
         return res.status(400).json({ success: false, error: 'provide order_id' });
     }
 
-    res.status(200).json(["Маргарита", "Кола", "Картошка фри", "Донер"]);
+    res.status(200).json({
+        success: true,
+        data: {
+            items: ["Маргарита", "Кола", "Картошка фри", "Донер"],
+            order_id: order_id,
+        }
+    });
 })
 
 app.listen(PORT, () => {
