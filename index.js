@@ -105,6 +105,23 @@ app.post('/mark-done', async (req, res) => {
     }
 });
 
+app.post('/webhook', (req, res) => {
+    const update = req.body;
+    console.log('🔔 Received Telegram update:', update);
+
+    // Example: reply to messages
+    // if (update.message?.text) {
+    //     const chatId = update.message.chat.id;
+    //     const reply = `You said: ${update.message.text}`;
+    //     axios.post(`https://api.telegram.org/bot${TOKEN}/sendMessage`, {
+    //         chat_id: chatId,
+    //         text: reply,
+    //     });
+    // }
+
+    res.sendStatus(200);
+});
+
 app.listen(PORT, () => {
     console.log(`✅ Server running at http://localhost:${PORT}`);
 });
