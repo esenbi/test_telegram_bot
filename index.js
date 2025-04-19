@@ -144,7 +144,7 @@ app.post('/webhook', async (req, res) => {
 });
 
 app.get('/items', async (req, res) => {
-    const {order_id} = req.body
+    const {order_id} = req.query
 
     if (!order_id) {
         return res.status(400).json({ success: false, error: 'provide order_id' });
