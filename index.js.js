@@ -63,16 +63,14 @@ app.post('/send-order', async (req, res) => {
             chat_id: CHAT_ID,
             message_id,
             reply_markup: {
-                keyboard: [
+                inline_keyboard: [
                     [
                         {
                             text: 'Собрать заказ',
                             web_app: { url: updatedUrl }
                         }
                     ]
-                ],
-                resize_keyboard: true,
-                one_time_keyboard: true
+                ]
             }
         });
 
