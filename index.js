@@ -53,7 +53,6 @@ app.post('/send-order', async (req, res) => {
             order_id,
             message_id,
             chat_id: CHAT_ID,
-            items: JSON.stringify(items)
         }).toString();
 
         const updatedUrl = `${WEB_APP_URL}?${queryParams}`;
