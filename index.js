@@ -119,7 +119,7 @@ app.post('/webhook', async (req, res) => {
     //     });
     // }
 
-    if (update.entities.type === 'bot_command' && update.text === '/start') {
+    if (update.entities?.type === 'bot_command' && update.text === '/start') {
         await axios.post(`${TELEGRAM_API}/sendMessage`, {
             chat_id: CHAT_ID,
             text: '📱 Пожалуйста, отправьте ваш номер телефона:',
