@@ -143,6 +143,16 @@ app.post('/webhook', async (req, res) => {
     res.sendStatus(200);
 });
 
+app.get('/items', async (req, res) => {
+    const {order_id} = req.body
+
+    if (!order_id) {
+        return res.status(400).json({ success: false, error: 'provide order_id' });
+    }
+
+    res.status(200).json(["Маргарита", "Кола", "Картошка фри", "Донер"]);
+})
+
 app.listen(PORT, () => {
     console.log(`✅ Server running at http://localhost:${PORT}`);
 });
