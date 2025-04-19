@@ -107,7 +107,7 @@ app.post('/mark-done', async (req, res) => {
 
 app.post('/webhook', (req, res) => {
     const update = req.body;
-    console.log('🔔 Received Telegram update:', update);
+    console.log('🔔 Received Telegram update:', JSON.stringify(update));
 
     // Example: reply to messages
     // if (update.message?.text) {
