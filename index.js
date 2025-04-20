@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const axios = require('axios');
 const cors = require('cors');
+import {isStartCommand} from './helpers'
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -9,7 +10,7 @@ const PORT = process.env.PORT || 3000;
 const TOKEN = process.env.BOT_TOKEN;
 const CHAT_ID = process.env.CHAT_ID;
 const WEB_APP_URL = process.env.WEB_APP_URL;
-const TELEGRAM_API = `https://api.telegram.org/bot${TOKEN}/test`;
+const TELEGRAM_API = `https://api.telegram.org/bot${TOKEN}`;
 
 app.use(cors());
 
@@ -118,9 +119,7 @@ app.post('/webhook', async (req, res) => {
     //     });
     // }
 
-    if (update.message?.entities &&
-        update.message.entities.some(e => e.type === 'bot_command') &&
-        update.message.text === '/start') {
+    if (isStartCommand(update)) {
         await axios.post(`${TELEGRAM_API}/sendMessage`, {
             chat_id: CHAT_ID,
             text: '📱 Пожалуйста, отправьте ваш номер телефона:',
