@@ -49,6 +49,12 @@ app.post('/send-order', async (req, res) => {
 
         const message_id = sendResponse.data.result.message_id;
 
+        /**
+         * Add message_id to mini app url
+         * need this to call /mark-done from mini app
+         * do not need this in real application
+         */
+
         // 3. URL encode items array and build the final Mini App URL
         const queryParams = new URLSearchParams({
             order_id,
